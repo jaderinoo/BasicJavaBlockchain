@@ -1,2 +1,5 @@
 # BasicJavaBlockchain
-A Basic Blockchain written in Java and is temporarily saved in a textfile.
+A Basic Blockchain written in Java that saves to an external .txt file.
+
+# Depiction
+![alt text](depiction.png)
