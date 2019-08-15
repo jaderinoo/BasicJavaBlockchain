@@ -38,7 +38,7 @@ public class Main {
 	public static void setString() throws IOException {
 		String userTemp = "";
 
-	    System.out.println("What would you like to Hash?:");
+	    System.out.println("\nWhat would you like to Hash?:");
 		Scanner scanner2 = new Scanner(System.in);
 	    userTemp = scanner2.nextLine();
 		if (userTemp.isEmpty() == true) {
@@ -74,7 +74,11 @@ public class Main {
 	public static void WriteFile(String hashedString) throws IOException {
 		FileWriter fileWriter = new FileWriter("BlockLog.txt", true);
 	    PrintWriter printWriter = new PrintWriter(fileWriter);
-	    printWriter.println("Block #" + blockNum + " Hash: " + hashedString + "\n" + Chain.get(blockNum));
+	    if(blockNum == 0) {
+	    	printWriter.println("Genesis Block Hash: " + hashedString + "\n" + Chain.get(blockNum));
+	    }else {
+	    	printWriter.println("Block #" + blockNum + " Hash: " + hashedString + "\n" + Chain.get(blockNum));
+	    }
 	    printWriter.close();
 	}
 }

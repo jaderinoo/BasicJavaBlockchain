@@ -1,4 +1,0 @@
-Block #0 Hash: -471289338
-BlockChain@3d4eac69
-Block #1 Hash: 1586798194
-BlockChain@75b84c92
