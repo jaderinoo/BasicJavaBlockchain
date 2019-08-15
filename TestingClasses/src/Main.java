@@ -12,31 +12,45 @@ public class Main {
 	static ArrayList<Object> Chain = new ArrayList<Object>();
 	
 	public static void main(String[] args) throws IOException {
-		
+		Scanner scanner = new Scanner(System.in);
 		//Resets the file
 		if(blockNum == 0) {
 			FileWriter fileWriter = new FileWriter("BlockLog.txt");
 		}
-		setString();
-		System.out.println("I'm back!");
+		
+		System.out.println("Please Select an Option:\n  1 - Add Item to Chain\n  2 - View Blockchain Contents");
+		
+		int selection = scanner.nextInt();
+		switch(selection) {
+			case 1:
+				setString();
+				break;
+			case 2:
+				System.out.println(Chain + "\n");
+				break;
+			default:
+				System.out.println("Invalid option. Please try again.\n"); 
+				break;
+		}
+		main(null);
 	}
 	
 	public static void setString() throws IOException {
 		String userTemp = "";
-		
-		Scanner scanner = new Scanner(System.in);
+
 	    System.out.println("What would you like to Hash?:");
-	    userTemp = scanner.nextLine();
+		Scanner scanner2 = new Scanner(System.in);
+	    userTemp = scanner2.nextLine();
 		if (userTemp.isEmpty() == true) {
-			System.out.println("Input is empty, returning");
-			setString();
+			System.out.println("Input is empty, returning\n");
+			main(null);
 		}
 		String[] genesisTransaction = userTemp.split("");
 		if(blockNum == 0) {
 			BlockChain genesisBlock = new BlockChain(0, previousTransaction, genesisTransaction);
-	        WriteFile(Integer.toString(genesisBlock.getBlockHash()));
-			System.out.println("Hash of block #" + blockNum);
 			Chain.add(genesisBlock);
+			WriteFile(Integer.toString(genesisBlock.getBlockHash()));
+			System.out.println("\nGenesis Block");
 	        System.out.println(genesisBlock.getBlockHash() + "\n" + Chain.get(blockNum)+ "\n");
 	        blockNum++;
 		}else {
@@ -47,9 +61,9 @@ public class Main {
 			}
 			String[] Transaction = userTemp.split("");
 			BlockChain Block = new BlockChain(blockNum, previousTransaction, Transaction);
-	        WriteFile(Integer.toString(Block.getBlockHash()));
 	        Chain.add(Block);
-			System.out.println("Hash of block #" + blockNum);
+			WriteFile(Integer.toString(Block.getBlockHash()));
+			System.out.println("\nHash of block #" + blockNum);
 	        System.out.println(Block.getBlockHash() + "\n" + Chain.get(blockNum)+ "\n");
 	        blockNum++;
 		}
@@ -60,7 +74,7 @@ public class Main {
 	public static void WriteFile(String hashedString) throws IOException {
 		FileWriter fileWriter = new FileWriter("BlockLog.txt", true);
 	    PrintWriter printWriter = new PrintWriter(fileWriter);
-	    printWriter.println("Block #" + blockNum + " Hash: " + hashedString);
+	    printWriter.println("Block #" + blockNum + " Hash: " + hashedString + "\n" + Chain.get(blockNum));
 	    printWriter.close();
 	}
 }
