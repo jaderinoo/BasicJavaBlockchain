@@ -1,6 +1,7 @@
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -8,6 +9,7 @@ public class Main {
 	static int blockNum = 0;
 	static String[] previousTransaction = {};
 	static String[] Transaction = {};
+	static ArrayList<Object> Chain = new ArrayList<Object>();
 	
 	public static void main(String[] args) throws IOException {
 		
@@ -34,7 +36,8 @@ public class Main {
 			BlockChain genesisBlock = new BlockChain(0, previousTransaction, genesisTransaction);
 	        WriteFile(Integer.toString(genesisBlock.getBlockHash()));
 			System.out.println("Hash of block #" + blockNum);
-	        System.out.println(genesisBlock.getBlockHash() + "\n");
+			Chain.add(genesisBlock);
+	        System.out.println(genesisBlock.getBlockHash() + "\n" + Chain.get(blockNum)+ "\n");
 	        blockNum++;
 		}else {
 			if(Transaction.length == 0) {
@@ -43,11 +46,11 @@ public class Main {
 				previousTransaction = Transaction;
 			}
 			String[] Transaction = userTemp.split("");
-	
 			BlockChain Block = new BlockChain(blockNum, previousTransaction, Transaction);
 	        WriteFile(Integer.toString(Block.getBlockHash()));
+	        Chain.add(Block);
 			System.out.println("Hash of block #" + blockNum);
-	        System.out.println(Block.getBlockHash() + "\n");
+	        System.out.println(Block.getBlockHash() + "\n" + Chain.get(blockNum)+ "\n");
 	        blockNum++;
 		}
 
