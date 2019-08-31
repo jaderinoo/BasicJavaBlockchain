@@ -46,7 +46,7 @@ public class Main {
 		}
 		String[] genesisTransaction = userTemp.split("");
 		if(blockNum == 0) {
-			BlockChain genesisBlock = new BlockChain(0, previousTransaction, genesisTransaction);
+			Block genesisBlock = new Block(0, previousTransaction, genesisTransaction);
 			Chain.add(genesisBlock);
 			WriteFile(Integer.toString(genesisBlock.getBlockHash()));
 			System.out.println("\nGenesis Block");
@@ -59,7 +59,7 @@ public class Main {
 				previousTransaction = Transaction;
 			}
 			String[] Transaction = userTemp.split("");
-			BlockChain Block = new BlockChain(blockNum, previousTransaction, Transaction);
+			Block Block = new Block(blockNum, previousTransaction, Transaction);
 	        Chain.add(Block);
 			WriteFile(Integer.toString(Block.getBlockHash()));
 			System.out.println("\nHash of block #" + blockNum);

@@ -1,10 +1,10 @@
 import java.util.Arrays;
 
-public class BlockChain {
+public class Block {
     private int blockHash;
     private String[] previousTransaction;
 
-    public BlockChain(int BlockNumber,String[] previousTransaction, String[] transactions) {
+    public Block(int BlockNumber,String[] previousTransaction, String[] transactions) {
 
         Object[] contents = {Arrays.hashCode(transactions), previousTransaction, BlockNumber};
         
